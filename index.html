@@ -1,9 +1,75 @@
 <!DOCTYPE html>
 <html lang="es"><head><meta charset="UTF-8"><meta name="viewport" content="width=device-width,initial-scale=1">
-<title>La Comisaría - Demo</title>
-<style>body{background:#0b1a33;color:white;font-family:sans-serif;padding:20px;text-align:center}h1{color:#38bdf8}.card{background:#122a4d;padding:20px;border-radius:16px;margin:15px 0}button{background:#38bdf8;border:0;padding:12px 20px;border-radius:12px;font-size:16px}</style></head>
-<body><h1>✨ LA COMISARÍA</h1><p>ComisariaBot V3.0 - Demo Pública</p>
-<div class="card"><h2>🛒 Carrito: <span id="cart">0</span></h2><p>Balón de fútbol - HNL 550.00</p><button onclick="agregar()">Agregar</button></div>
-<div class="card" id="msg">¡Hola! Soy ComisariaBot. Ya estoy en vivo.</div>
-<script>let c=0;function agregar(){c++;document.getElementById('cart').innerText=c;document.getElementById('msg').innerText='✅ Agregaste 1 producto. Llevás '+c;}</script>
+<title>La Comisaría - ComisariaBot V3.0</title>
+<style>
+*{box-sizing:border-box}body{margin:0;background:#0a1a33;color:white;font-family:sans-serif}
+header{background:#0d2247;padding:12px 14px;display:flex;justify-content:space-between;align-items:center}
+header b{font-size:18px;letter-spacing:1px}header small{display:block;color:#9db8d6;font-size:10px;letter-spacing:1px}
+.live{color:#4ade80;font-size:12px}
+.card{background:#122a4d;border:1px solid #1e3a5f;border-radius:18px;margin:14px;padding:16px}
+.tabs{display:flex;gap:8px;overflow:auto;padding:0 10px;white-space:nowrap}
+.tabs button{background:#0f2a52;color:#cbd5e1;border:1px solid #1e3a5f;padding:10px 12px;border-radius:12px}
+.tabs button.active{background:#0ea5e9;color:white}
+.chat{background:#0b2547;border-radius:14px;padding:14px;line-height:1.5;font-size:14px}
+.chips{display:flex;gap:8px;flex-wrap:wrap;margin:14px}
+.chips span{background:#132e57;border:1px solid #1e3a5f;padding:8px 12px;border-radius:20px;font-size:13px}
+.search{display:flex;gap:8px;margin:10px 0}
+.search input{flex:1;background:#0b2547;border:1px solid #1e3a5f;color:white;padding:13px;border-radius:14px}
+.search button{background:#0ea5e9;border:0;color:white;width:52px;border-radius:14px;font-size:20px}
+.opts{display:flex;gap:14px;font-size:12px;color:#94a3b8;align-items:center}
+.grid{display:grid;grid-template-columns:1fr 1fr;gap:12px;margin-top:12px}
+.prod{background:#132e57;border:1px solid #1e3a5f;border-radius:16px;padding:14px}
+.prod small{color:#94a3b8}.prod b{color:#38bdf8;font-size:17px;display:block;margin-top:4px}
+.prod button{float:right;background:#1e3a5f;color:white;border:1px solid #2d4a73;padding:6px 10px;border-radius:10px}
+.cartbar{position:fixed;bottom:0;left:0;right:0;background:#0ea5e9;color:white;padding:14px;text-align:center;font-weight:bold}
+</style></head>
+<body>
+<header><div><b>✦ LA COMISARÍA</b><small>MARKETPLACE INTELIGENTE • V3.0</small></div><div class="live">● Servidor local activo • V3.0.0</div></header>
+
+<div class="card">
+<b style="font-size:22px">✦ ComisariaBot <span style="color:#38bdf8">V3.0</span></b><br>
+<small style="color:#94a3b8">Compras por voz • Marketplace hondureño • HNL</small>
+</div>
+
+<div class="tabs">
+<button class="active">Marketplace</button><button>Seis agentes</button><button>Mi cuenta</button><button>Vendedor</button><button>Administración</button>
+</div>
+
+<div class="card">
+<div class="chat" id="chat">¡Hola! Soy ComisariaBot V3.0. Puedes escribirme o hablarme. Busca productos por nombre, categoría o presupuesto en lempiras.</div>
+<div class="chips"><span>💻 Tecnología</span><span>🏠 Hogar</span><span>👕 Moda</span><span>🛍️ Catálogo</span></div>
+<div class="search">
+<input id="q" placeholder="¿Qué producto estás buscando?">
+<button onclick="hablar()">🎤</button><button onclick="buscar()">➤</button>
+</div>
+<div class="opts"><label><input type="checkbox" checked> Leer respuestas</label><span>Detener audio</span><span>Micrófono bajo demanda</span></div>
+
+<h2>Catálogo</h2>
+<div style="display:flex;gap:8px"><input id="max" placeholder="Presupuesto máximo (HNL)" style="flex:1;background:#0b2547;border:1px solid #1e3a5f;color:white;padding:12px;border-radius:12px"><button onclick="filtrar()" style="background:#0ea5e9;border:0;color:white;padding:12px 16px;border-radius:12px">Filtrar</button></div>
+
+<div class="grid" id="grid"></div>
+</div>
+<div style="height:70px"></div>
+<div class="cartbar" onclick="verCarrito()">🛒 Carrito: <span id="cart">0</span> productos • Ver carrito</div>
+
+<script>
+let productos=[
+{name:"Balón de fútbol",cat:"Deportes",stock:15,precio:550},
+{name:"Camisa casual",cat:"Moda",stock:25,precio:420},
+{name:"Refrigeradora mediana",cat:"Hogar",stock:4,precio:12500},
+{name:"Licuadora familiar",cat:"Hogar",stock:8,precio:1850},
+{name:"Audífonos Bluetooth",cat:"Tecnología",stock:20,precio:950},
+{name:"Tenis deportivos",cat:"Moda",stock:12,precio:1450},
+];
+let carrito=0;
+function pintar(lista){
+document.getElementById('grid').innerHTML=lista.map(p=>`<div class="prod"><b>${p.name}</b><small>${p.cat} • Existencias: ${p.stock}</small><div><b>HNL ${p.precio}.00</b><button onclick="agregar('${p.name}')">Agregar</button></div></div>`).join('');
+}
+function agregar(n){carrito++;document.getElementById('cart').innerText=carrito;document.getElementById('chat').innerText='✅ Agregaste '+n+' al carrito. Llevás '+carrito+' productos.'}
+function buscar(){let q=document.getElementById('q').value.toLowerCase();let f=productos.filter(p=>p.name.toLowerCase().includes(q));pintar(f.length?f:productos);document.getElementById('chat').innerText='Busqué "'+q+'". Encontré '+f.length+' productos.'}
+function filtrar(){let m=parseInt(document.getElementById('max').value)||999999;pintar(productos.filter(p=>p.precio<=m))}
+function hablar(){document.getElementById('chat').innerText='🎤 Te estoy escuchando... Decime qué buscás, preciosa.'}
+function verCarrito(){alert('Llevás '+carrito+' productos en tu carrito de La Comisaría.')}
+pintar(productos);
+</script>
 </body></html>
