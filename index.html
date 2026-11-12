@@ -10,8 +10,9 @@ header b{font-size:18px;letter-spacing:1px}header small{display:block;color:#9db
 .tabs{display:flex;gap:8px;overflow:auto;padding:0 10px;white-space:nowrap}
 .tabs button{background:#0f2a52;color:#cbd5e1;border:1px solid #1e3a5f;padding:10px 12px;border-radius:12px}
 .tabs button.active{background:#0ea5e9;color:white}
-.chat{background:#0b2547;border-radius:14px;padding:14px;line-height:1.5;font-size:14px}
-.chips{display:flex;gap:8px;flex-wrap:wrap;margin:14px}
+.bubble{background:#0b2547;border-radius:14px;padding:14px;line-height:1.5;font-size:14px;margin:8px 0}
+.bubble.me{background:#0ea5e9;text-align:right;margin-left:40%}
+.chips{display:flex;gap:8px;flex-wrap:wrap;margin:14px 0}
 .chips span{background:#132e57;border:1px solid #1e3a5f;padding:8px 12px;border-radius:20px;font-size:13px}
 .search{display:flex;gap:8px;margin:10px 0}
 .search input{flex:1;background:#0b2547;border:1px solid #1e3a5f;color:white;padding:13px;border-radius:14px}
@@ -25,50 +26,51 @@ header b{font-size:18px;letter-spacing:1px}header small{display:block;color:#9db
 </style></head>
 <body>
 <header><div><b>✦ LA COMISARÍA</b><small>MARKETPLACE INTELIGENTE • V3.0</small></div><div class="live">● Servidor local activo • V3.0.0</div></header>
-
 <div class="card">
 <b style="font-size:22px">✦ ComisariaBot <span style="color:#38bdf8">V3.0</span></b><br>
 <small style="color:#94a3b8">Compras por voz • Marketplace hondureño • HNL</small>
 </div>
-
 <div class="tabs">
 <button class="active">Marketplace</button><button>Seis agentes</button><button>Mi cuenta</button><button>Vendedor</button><button>Administración</button>
 </div>
-
 <div class="card">
-<div class="chat" id="chat">¡Hola! Soy ComisariaBot V3.0. Puedes escribirme o hablarme. Busca productos por nombre, categoría o presupuesto en lempiras.</div>
+<div id="chat">
+<div class="bubble">¡Hola! Soy ComisariaBot V3.0. Puedes escribirme o hablarme. Busca productos por nombre, categoría o presupuesto en lempiras.</div>
+<div class="bubble">Encontré 1 producto(s): Camisa casual HNL 420.00</div>
+<div class="bubble me">Hogar</div>
+<div class="bubble">Encontré 2 producto(s): Refrigeradora mediana HNL 9,490.00; Licuadora familiar HNL 1,590.00</div>
+</div>
 <div class="chips"><span>💻 Tecnología</span><span>🏠 Hogar</span><span>👕 Moda</span><span>🛍️ Catálogo</span></div>
 <div class="search">
 <input id="q" placeholder="¿Qué producto estás buscando?">
 <button onclick="hablar()">🎤</button><button onclick="buscar()">➤</button>
 </div>
 <div class="opts"><label><input type="checkbox" checked> Leer respuestas</label><span>Detener audio</span><span>Micrófono bajo demanda</span></div>
-
 <h2>Catálogo</h2>
 <div style="display:flex;gap:8px"><input id="max" placeholder="Presupuesto máximo (HNL)" style="flex:1;background:#0b2547;border:1px solid #1e3a5f;color:white;padding:12px;border-radius:12px"><button onclick="filtrar()" style="background:#0ea5e9;border:0;color:white;padding:12px 16px;border-radius:12px">Filtrar</button></div>
-
 <div class="grid" id="grid"></div>
 </div>
 <div style="height:70px"></div>
 <div class="cartbar" onclick="verCarrito()">🛒 Carrito: <span id="cart">0</span> productos • Ver carrito</div>
-
 <script>
 let productos=[
 {name:"Balón de fútbol",cat:"Deportes",stock:15,precio:550},
 {name:"Camisa casual",cat:"Moda",stock:25,precio:420},
-{name:"Refrigeradora mediana",cat:"Hogar",stock:4,precio:12500},
-{name:"Licuadora familiar",cat:"Hogar",stock:8,precio:1850},
+{name:"Refrigeradora mediana",cat:"Hogar",stock:4,precio:9490},
+{name:"Licuadora familiar",cat:"Hogar",stock:8,precio:1590},
 {name:"Audífonos Bluetooth",cat:"Tecnología",stock:20,precio:950},
 {name:"Tenis deportivos",cat:"Moda",stock:12,precio:1450},
 ];
 let carrito=0;
+function fmt(n){return n.toLocaleString('en-US')}
 function pintar(lista){
-document.getElementById('grid').innerHTML=lista.map(p=>`<div class="prod"><b>${p.name}</b><small>${p.cat} • Existencias: ${p.stock}</small><div><b>HNL ${p.precio}.00</b><button onclick="agregar('${p.name}')">Agregar</button></div></div>`).join('');
+document.getElementById('grid').innerHTML=lista.map(p=>`<div class="prod"><b>${p.name}</b><small>${p.cat} • Existencias: ${p.stock}</small><div><b>HNL ${fmt(p.precio)}.00</b><button onclick="agregar('${p.name}')">Agregar</button></div></div>`).join('');
 }
-function agregar(n){carrito++;document.getElementById('cart').innerText=carrito;document.getElementById('chat').innerText='✅ Agregaste '+n+' al carrito. Llevás '+carrito+' productos.'}
-function buscar(){let q=document.getElementById('q').value.toLowerCase();let f=productos.filter(p=>p.name.toLowerCase().includes(q));pintar(f.length?f:productos);document.getElementById('chat').innerText='Busqué "'+q+'". Encontré '+f.length+' productos.'}
+function addBubble(t,me){let d=document.createElement('div');d.className='bubble'+(me?' me':'');d.innerText=t;document.getElementById('chat').appendChild(d)}
+function agregar(n){carrito++;document.getElementById('cart').innerText=carrito;addBubble('✅ Agregaste '+n+' al carrito. Llevás '+carrito+' productos.')}
+function buscar(){let q=document.getElementById('q').value.toLowerCase();let f=productos.filter(p=>p.name.toLowerCase().includes(q)||p.cat.toLowerCase().includes(q));pintar(f.length?f:productos);if(q) addBubble(q,true);addBubble('Encontré '+f.length+' producto(s): '+f.map(p=>p.name+' HNL '+fmt(p.precio)+'.00').join('; '))}
 function filtrar(){let m=parseInt(document.getElementById('max').value)||999999;pintar(productos.filter(p=>p.precio<=m))}
-function hablar(){document.getElementById('chat').innerText='🎤 Te estoy escuchando... Decime qué buscás, preciosa.'}
+function hablar(){addBubble('🎤 Te estoy escuchando... Decime qué buscás, preciosa.')}
 function verCarrito(){alert('Llevás '+carrito+' productos en tu carrito de La Comisaría.')}
 pintar(productos);
 </script>
