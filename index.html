@@ -1,64 +1,673 @@
-<!DOCTYPE html>
-<html lang="es">
-<head>
-<meta charset="UTF-8">
-<meta name="viewport" content="width=device-width, initial-scale=1">
-<title>LA COMISARÍA - ComisariaBot V3.0</title>
-<style>
-*{box-sizing:border-box;margin:0;padding:0}
-body{background:#071a36;color:#fff;font-family:system-ui,sans-serif;padding-bottom:80px}
-header{background:#0a2148;padding:14px 14px 12px;display:flex;justify-content:space-between;align-items:flex-start}
-.logo{display:flex;gap:10px;align-items:center}
-.icon{width:44px;height:44px;background:#2563eb;border-radius:12px;display:flex;align-items:center;justify-content:center;font-size:22px}
-header h1{font-size:19px;letter-spacing:1px;line-height:1}
-header h1 small{display:block;font-size:9px;color:#9bb6d6;letter-spacing:1.2px;font-weight:400;margin-top:2px}
-.live{color:#4ade80;font-size:11px;text-align:right;line-height:1.3}
-.wrap{padding:12px}
-.hero{background:#122a4d;border:1px solid #1e3f66;border-radius:18px;padding:18px}
-.hero h2{font-size:25px}.hero h2 span{color:#38bdf8}
-.hero p{color:#94a3b8;font-size:13px;margin-top:4px}
-.tabs{display:flex;gap:8px;overflow-x:auto;padding:12px 0;scrollbar-width:none}
-.tabs button{white-space:nowrap;background:#0f2a52;color:#dbeafe;border:1px solid #1e3f66;padding:10px 14px;border-radius:12px;font-size:13px}
-.tabs button.active{background:#0284c7;color:#fff;border-color:#0284c7}
-.card{background:#122a4d;border:1px solid #1e3f66;border-radius:18px;padding:16px}
-.chat{background:#0b2547;border-radius:14px;padding:15px;font-size:14px;line-height:1.6}
-.chips{display:flex;gap:8px;flex-wrap:wrap;margin:14px 0}
-.chips span{background:#132e57;border:1px solid #1e3f66;padding:8px 12px;border-radius:20px;font-size:13px}
-.search{display:flex;gap:8px}
-.search input{flex:1;background:#0b2547;border:1px solid #1e3f66;color:#fff;padding:14px;border-radius:14px;font-size:14px;outline:none}
-.search button{background:#0ea5e9;border:0;color:#fff;width:52px;border-radius:14px;font-size:20px}
-.opts{display:flex;gap:14px;flex-wrap:wrap;font-size:12px;color:#94a3b8;margin:12px 0;align-items:center}
-.opts b{color:#fff}
-h3{font-size:19px;margin:14px 0 10px}
-.filter{display:flex;gap:8px}
-.filter input{flex:1;background:#0b2547;border:1px solid #1e3f66;color:#fff;padding:12px;border-radius:12px}
-.filter button{background:#0ea5e9;border:0;color:#fff;padding:12px 18px;border-radius:12px;font-weight:bold}
-.grid{display:grid;grid-template-columns:1fr 1fr;gap:12px;margin-top:14px}
-.prod{background:#132e57;border:1px solid #1e3f66;border-radius:16px;padding:14px;min-height:110px}
-.prod h4{font-size:14px;line-height:1.3}.prod small{color:#94a3b8;font-size:11px;display:block;margin:4px 0 8px}
-.prod b{color:#38bdf8;font-size:16px}.prod button{float:right;background:#1e3a5f;color:#fff;border:1px solid #33507a;padding:7px 10px;border-radius:10px;font-size:12px}
-.bottom{position:fixed;bottom:0;left:0;right:0;background:#0ea5e9;padding:15px;text-align:center;font-weight:800}
-</style>
-</head>
-<body>
-<header>
-<div class="logo"><div class="icon">✦</div><h1>LA COMISARÍA<small>MARKETPLACE INTELIGENTE • V3.0</small></h1></div>
-<div class="live">● Servidor local activo<br>• V3.0.0</div>
-</header>
+.venv) ~/ComisariaBot_V3_0 $ git status
+On branch master                     
+No commits yet                       
+Untracked files:                       (use "git add <file>..." to include in what will be committed)
+        .env.example
+        .gitignore                           README.md
+        TRINITY-THEOLOGIC-v2.6/
+        app.py
+        data/
+        install_termux.sh
+        requirements.txt
+        run.sh
+        static/
+        templates/
 
-<div class="wrap">
-<div class="hero"><h2>✦ ComisariaBot <span>V3.0</span></h2><p>Compras por voz • Marketplace hondureño • HNL</p></div>
+nothing added to commit but untracked files present (use "git add" to track)
+(.venv) ~/ComisariaBot_V3_0 $ git status
+On branch master
 
-<div class="tabs" id="tabs">
-<button class="active" onclick="tab(this,'Marketplace')">Marketplace</button>
-<button onclick="tab(this,'Seis agentes')">Seis agentes</button>
-<button onclick="tab(this,'Mi cuenta')">Mi cuenta</button>
-<button onclick="tab(this,'Vendedor')">Vendedor</button>
-<button onclick="tab(this,'Administración')">Administración</button>
-</div>
+No commits yet
 
-<div class="card">
-<div class="chat" id="chat">¡Hola! Soy ComisariaBot V3.0. Puedes escribirme o hablarme. Busca productos por nombre, categoría o presupuesto en lempiras.</div>
-<div class="chips"><span onclick="cat('Tecnología')">💻 Tecnología</span><span onclick="cat('Hogar')">🏠 Hogar</span><span onclick="cat('Moda')">👕 Moda</span><span onclick="cat('')">🛍️ Catálogo</span></div>
-<div class="search"><input id="q" placeholder="¿Qué producto estás buscando?"><button onclick="hablar()">🎤</button><button onclick="buscar()">➤</button></div>
-<div class="opts"><label><input type="checkbox" checked> <b>Leer respuestas</b></label><span>Detener audio</span
+Untracked files:
+  (use "git add <file>..." to include in what will be committed)
+        .env.example
+        .gitignore
+        README.md
+        TRINITY-THEOLOGIC-v2.6/
+        app.py
+        data/
+        install_termux.sh
+        requirements.txt
+        run.sh
+        static/
+        templates/
+
+nothing added to commit but untracked files present (use "git add" to track)
+(.venv) ~/ComisariaBot_V3_0 $ echo "TRINITY-THEOLOGIC-v2.6/" >> .gitignore(.venv) ~/ComisariaBot_V3_0 $ git add .
+(.venv) ~/ComisariaBot_V3_0 $ git commit -m "ComisariaBot V3.0 bonita lista"
+[master (root-commit) 741c50c] ComisariaBot V3.0 bonita lista
+ 11 files changed, 438 insertions(+)
+ create mode 100644 .env.example
+ create mode 100644 .gitignore
+ create mode 100644 README.md
+ create mode 100644 app.py
+ create mode 100644 data/comisariabot.db
+ create mode 100644 install_termux.sh
+ create mode 100644 requirements.txt
+ create mode 100644 run.sh
+ create mode 100644 static/app.js
+ create mode 100644 static/styles.css
+ create mode 100644 templates/index.html
+(.venv) ~/ComisariaBot_V3_0 $ git push
+fatal: No configured push destination.
+Either specify the URL from the command-line or configure a remote repository using
+
+    git remote add <name> <url>
+
+and then push using the remote name
+
+    git push <name>
+
+(.venv) ~/ComisariaBot_V3_0 $ git remote -v
+(.venv) ~/ComisariaBot_V3_0 $ git add .
+(.venv) ~/ComisariaBot_V3_0 $ git branch -M main
+(.venv) ~/ComisariaBot_V3_0 $ git push -u origin main^C
+(.venv) ~/ComisariaBot_V3_0 $ git commit -m "ComisariaBot V3.0 listo"
+On branch main
+nothing to commit, working tree clean
+(.venv) ~/ComisariaBot_V3_0 $ git remote add origin https://github.com/zalemjeruz47-design/ComisariaBot_V3_0.git
+(.venv) ~/ComisariaBot_V3_0 $ git push -u origin main
+Username for 'https://github.com': zalemjeruz47-design
+Password for 'https://zalemjeruz47-design@github.com':
+remote: Invalid username or token. Password authentication is not supported for Git operations.
+fatal: Authentication failed for 'https://github.com/zalemjeruz47-design/ComisariaBot_V3_0.git/'
+(.venv) ~/ComisariaBot_V3_0 $ ^C
+(.venv) ~/ComisariaBot_V3_0 $ git push -u origin main
+Username for 'https://github.com': zalemjeruz-design
+Password for 'https://zalemjeruz-design@github.com':
+remote: Repository not found.
+fatal: repository 'https://github.com/zalemjeruz47-design/ComisariaBot_V3_0.git/' not found
+(.venv) ~/ComisariaBot_V3_0 $ git remote set-url origin https://github.com/zalemjeruz47-design/ComisariaBot_V3_0-.git
+(.venv) ~/ComisariaBot_V3_0 $ git push -u origin main
+Username for 'https://github.com': git push -u origin main
+Password for 'https://git%20push%20-u%20origin%20main@github.com':
+(.venv) ~/ComisariaBot_V3_0 $ ~/ComisariaBot_V3_0 $
+bash: /data/data/com.termux/files/home/ComisariaBot_V3_0: Is a directory
+(.venv) ~/ComisariaBot_V3_0 $ git push -u origin main
+Username for 'https://github.com': zalemjeruz-design
+Password for 'https://zalemjeruz-design@github.com':
+Enumerating objects: 16, done.
+Counting objects: 100% (16/16), done.
+Delta compression using up to 8 threads
+Compressing objects: 100% (12/12), done.
+Writing objects: 100% (16/16), 15.49 KiB | 1.19 MiB/s, done.
+Total 16 (delta 0), reused 0 (delta 0), pack-reused 0 (from 0)
+To https://github.com/zalemjeruz47-design/ComisariaBot_V3_0-.git
+ * [new branch]      main -> main
+branch 'main' set up to track 'origin/main'.
+(.venv) ~/ComisariaBot_V3_0 $ python main.py
+/data/data/com.termux/files/home/ComisariaBot_V3_0/.venv/bin/python: can't open file '/data/data/com.termux/files/home/ComisariaBot_V3_0/main.py': [Errno 2] No such file or directory
+(.venv) ~/ComisariaBot_V3_0 $ ls
+README.md
+TRINITY-THEOLOGIC-v2.6
+app.py
+data
+install_termux.sh
+requirements.txt
+run.sh
+static
+templates
+(.venv) ~/ComisariaBot_V3_0 $ python app.py
+ * Serving Flask app 'app'
+ * Debug mode: off
+WARNING: This is a development server. Do not use it in a production deployment. Use a production WSGI server instead.
+ * Running on http://127.0.0.1:8000
+Press CTRL+C to quit
+127.0.0.1 - - [11/Nov/2026 16:58:10] "GET /api/health HTTP/1.1" 200 -
+127.0.0.1 - - [11/Nov/2026 16:58:10] "GET /favicon.ico HTTP/1.1" 404 -
+127.0.0.1 - - [11/Nov/2026 16:58:14] "GET / HTTP/1.1" 200 -
+127.0.0.1 - - [11/Nov/2026 16:58:14] "GET /static/styles.css HTTP/1.1" 304 -
+127.0.0.1 - - [11/Nov/2026 16:58:14] "GET /static/app.js HTTP/1.1" 304 -
+127.0.0.1 - - [11/Nov/2026 16:58:14] "GET /api/catalog?q=&max_price= HTTP/1.1" 200 -
+127.0.0.1 - - [11/Nov/2026 16:58:14] "GET /api/health HTTP/1.1" 200 -
+127.0.0.1 - - [11/Nov/2026 16:58:21] "GET / HTTP/1.1" 200 -
+127.0.0.1 - - [11/Nov/2026 16:58:22] "GET /static/styles.css HTTP/1.1" 304 -
+127.0.0.1 - - [11/Nov/2026 16:58:22] "GET /static/app.js HTTP/1.1" 304 -
+127.0.0.1 - - [11/Nov/2026 16:58:22] "GET /api/catalog?q=&max_price= HTTP/1.1" 200 -
+127.0.0.1 - - [11/Nov/2026 16:58:22] "GET /api/health HTTP/1.1" 200 -
+127.0.0.1 - - [11/Nov/2026 16:59:07] "GET /api/me HTTP/1.1" 200 -
+127.0.0.1 - - [11/Nov/2026 16:59:20] "GET /api/seller/products HTTP/1.1" 401 -
+127.0.0.1 - - [11/Nov/2026 16:59:23] "GET /api/admin/summary HTTP/1.1" 401 -
+127.0.0.1 - - [11/Nov/2026 17:00:20] "POST /api/orders HTTP/1.1" 401 -
+127.0.0.1 - - [11/Nov/2026 17:48:29] "GET /favicon.ico HTTP/1.1" 404 -
+127.0.0.1 - - [11/Nov/2026 17:48:29] "GET /api/health HTTP/1.1" 200 -
+127.0.0.1 - - [11/Nov/2026 18:32:49] "GET /favicon.ico HTTP/1.1" 404 -
+127.0.0.1 - - [11/Nov/2026 18:32:49] "GET /api/health HTTP/1.1" 200 -
+127.0.0.1 - - [11/Nov/2026 18:53:26] "GET /api/health HTTP/1.1" 200 -
+127.0.0.1 - - [11/Nov/2026 18:53:26] "GET /favicon.ico HTTP/1.1" 404 -
+127.0.0.1 - - [11/Nov/2026 19:31:19] "GET /favicon.ico HTTP/1.1" 404 -
+127.0.0.1 - - [11/Nov/2026 19:31:19] "GET /api/health HTTP/1.1" 200 -
+127.0.0.1 - - [11/Nov/2026 19:32:12] "GET /api/health HTTP/1.1" 200 -
+127.0.0.1 - - [11/Nov/2026 19:32:12] "GET /favicon.ico HTTP/1.1" 404 -
+127.0.0.1 - - [11/Nov/2026 19:40:22] "GET /favicon.ico HTTP/1.1" 404 -
+127.0.0.1 - - [11/Nov/2026 19:40:22] "GET /api/health HTTP/1.1" 200 -
+127.0.0.1 - - [11/Nov/2026 19:40:30] "GET /api/catalog?q=&max_price= HTTP/1.1" 200 -
+127.0.0.1 - - [11/Nov/2026 19:40:49] "GET /api/catalog?q=quiero+zapatos&max_price= HTTP/1.1" 200 -
+127.0.0.1 - - [11/Nov/2026 19:41:14] "GET /api/me HTTP/1.1" 200 -
+127.0.0.1 - - [11/Nov/2026 19:41:15] "GET /api/seller/products HTTP/1.1" 401 -
+127.0.0.1 - - [11/Nov/2026 19:41:16] "GET /api/admin/summary HTTP/1.1" 401 -
+127.0.0.1 - - [11/Nov/2026 19:41:20] "GET / HTTP/1.1" 200 -
+127.0.0.1 - - [11/Nov/2026 19:41:20] "GET /static/styles.css HTTP/1.1" 304 -
+127.0.0.1 - - [11/Nov/2026 19:41:20] "GET /static/app.js HTTP/1.1" 304 -
+127.0.0.1 - - [11/Nov/2026 19:41:20] "GET /api/catalog?q=&max_price= HTTP/1.1" 200 -
+127.0.0.1 - - [11/Nov/2026 19:41:20] "GET /api/health HTTP/1.1" 200 -
+127.0.0.1 - - [11/Nov/2026 19:43:26] "GET / HTTP/1.1" 200 -
+127.0.0.1 - - [11/Nov/2026 19:43:26] "GET /static/app.js HTTP/1.1" 304 -
+127.0.0.1 - - [11/Nov/2026 19:43:26] "GET /static/styles.css HTTP/1.1" 304 -
+127.0.0.1 - - [11/Nov/2026 19:43:26] "GET /api/catalog?q=&max_price= HTTP/1.1" 200 -
+127.0.0.1 - - [11/Nov/2026 19:43:26] "GET /api/health HTTP/1.1" 200 -
+127.0.0.1 - - [11/Nov/2026 19:43:26] "GET /favicon.ico HTTP/1.1" 404 -
+127.0.0.1 - - [11/Nov/2026 19:43:28] "GET /api/seller/products HTTP/1.1" 401 -
+127.0.0.1 - - [11/Nov/2026 19:43:29] "GET /api/me HTTP/1.1" 200 -
+127.0.0.1 - - [11/Nov/2026 19:44:43] "GET / HTTP/1.1" 200 -
+127.0.0.1 - - [11/Nov/2026 19:44:43] "GET /static/app.js HTTP/1.1" 304 -
+127.0.0.1 - - [11/Nov/2026 19:44:43] "GET /static/styles.css HTTP/1.1" 304 -
+127.0.0.1 - - [11/Nov/2026 19:44:43] "GET /api/catalog?q=&max_price= HTTP/1.1" 200 -
+127.0.0.1 - - [11/Nov/2026 19:44:43] "GET /api/health HTTP/1.1" 200 -
+ls
+
+(.venv) ~/ComisariaBot_V3_0 $ ls
+README.md
+TRINITY-THEOLOGIC-v2.6
+app.py
+data
+install_termux.sh
+requirements.txt
+run.sh
+static
+templates
+(.venv) ~/ComisariaBot_V3_0 $ cp -r ~/ComisariaBot_V3_0 ~/ComisariaBot_V3_0_COPIA_SEGURIDAD
+(.venv) ~/ComisariaBot_V3_0 $ ls ~ | grep COPIA
+ComisariaBot_V3_0_COPIA_SEGURIDAD
+(.venv) ~/ComisariaBot_V3_0 $ diff -r ~/ComisariaBot_V3_0 ~/ComisariaBot_V3_0_COPIA_SEGURIDAD && echo SON_IGUALES
+SON_IGUALES
+(.venv) ~/ComisariaBot_V3_0 $ ./run.sh
+bash: ./run.sh: Permission denied
+(.venv) ~/ComisariaBot_V3_0 $ bash run.sh
+ * Serving Flask app 'app'
+ * Debug mode: off
+WARNING: This is a development server. Do not use it in a production deployment. Use a production WSGI server instead.
+ * Running on http://127.0.0.1:8000
+Press CTRL+C to quit
+127.0.0.1 - - [11/Nov/2026 20:04:03] "GET / HTTP/1.1" 200 -
+127.0.0.1 - - [11/Nov/2026 20:04:03] "GET /static/app.js HTTP/1.1" 304 -
+127.0.0.1 - - [11/Nov/2026 20:04:03] "GET /static/styles.css HTTP/1.1" 304 -
+127.0.0.1 - - [11/Nov/2026 20:04:03] "GET /api/catalog?q=&max_price= HTTP/1.1" 200 -
+127.0.0.1 - - [11/Nov/2026 20:04:03] "GET /api/health HTTP/1.1" 200 -
+127.0.0.1 - - [11/Nov/2026 20:04:03] "GET /favicon.ico HTTP/1.1" 404 -
+127.0.0.1 - - [11/Nov/2026 20:04:04] "GET /api/me HTTP/1.1" 200 -
+127.0.0.1 - - [11/Nov/2026 20:04:25] "GET /api/health HTTP/1.1" 200 -
+127.0.0.1 - - [11/Nov/2026 20:04:42] "GET /trinity.html HTTP/1.1" 404 -
+127.0.0.1 - - [11/Nov/2026 20:04:52] "GET /trinity.html HTTP/1.1" 404 -
+grep -n "@app.route" app.py
+
+(.venv) ~/ComisariaBot_V3_0 $ grep -n "@app.route" app.py
+(.venv) ~/ComisariaBot_V3_0 $ cat app.py
+import os, sqlite3, secrets, hashlib, hmac, json, re
+from datetime import datetime, timedelta, timezone
+from functools import wraps
+from flask import Flask, request, jsonify, render_template, g, session
+from werkzeug.security import generate_password_hash, check_password_hash
+
+ROOT = os.path.dirname(os.path.abspath(__file__))
+DB_PATH = os.environ.get("CB_DB_PATH", os.path.join(ROOT, "data", "comisariabot.db"))
+SECRET_KEY = os.environ.get("CB_SECRET_KEY", "CHANGE-ME-" + secrets.token_hex(24))
+ADMIN_EMAIL = os.environ.get("CB_ADMIN_EMAIL", "admin@comisaria.local").lower()
+ADMIN_PASSWORD = os.environ.get("CB_ADMIN_PASSWORD", "Cambiar123!")
+app = Flask(__name__, static_folder="static", template_folder="templates")
+app.secret_key = SECRET_KEY
+app.config.update(SESSION_COOKIE_HTTPONLY=True, SESSION_COOKIE_SAMESITE="Lax",
+                  SESSION_COOKIE_SECURE=os.environ.get("CB_HTTPS", "0") == "1",
+                  MAX_CONTENT_LENGTH=2 * 1024 * 1024)
+
+def db():
+    if "db" not in g:
+        os.makedirs(os.path.dirname(DB_PATH), exist_ok=True)
+        g.db = sqlite3.connect(DB_PATH)
+        g.db.row_factory = sqlite3.Row
+        g.db.execute("PRAGMA foreign_keys=ON")
+    return g.db
+
+@app.teardown_appcontext
+def close_db(_):
+    conn = g.pop("db", None)
+    if conn is not None: conn.close()
+
+def init_db():
+    with app.app_context():
+        c = db()
+        c.executescript("""
+        CREATE TABLE IF NOT EXISTS users(
+          id INTEGER PRIMARY KEY AUTOINCREMENT, name TEXT NOT NULL, email TEXT UNIQUE NOT NULL,
+          password_hash TEXT NOT NULL, role TEXT NOT NULL CHECK(role IN ('buyer','seller','admin')),
+          active INTEGER NOT NULL DEFAULT 1, created_at TEXT NOT NULL);
+        CREATE TABLE IF NOT EXISTS products(
+          id INTEGER PRIMARY KEY AUTOINCREMENT, seller_id INTEGER, name TEXT NOT NULL,
+          category TEXT NOT NULL DEFAULT 'General', description TEXT DEFAULT '',
+          price_hnl REAL NOT NULL CHECK(price_hnl>=0), stock INTEGER NOT NULL DEFAULT 0 CHECK(stock>=0),
+          active INTEGER NOT NULL DEFAULT 1, created_at TEXT NOT NULL,
+          FOREIGN KEY(seller_id) REFERENCES users(id));
+        CREATE TABLE IF NOT EXISTS orders(
+          id INTEGER PRIMARY KEY AUTOINCREMENT, buyer_id INTEGER NOT NULL, total_hnl REAL NOT NULL,
+          status TEXT NOT NULL DEFAULT 'pending', created_at TEXT NOT NULL,
+          FOREIGN KEY(buyer_id) REFERENCES users(id));
+        CREATE TABLE IF NOT EXISTS order_items(
+          id INTEGER PRIMARY KEY AUTOINCREMENT, order_id INTEGER NOT NULL, product_id INTEGER NOT NULL,
+          seller_id INTEGER, product_name TEXT NOT NULL, quantity INTEGER NOT NULL,
+          unit_price_hnl REAL NOT NULL,
+          FOREIGN KEY(order_id) REFERENCES orders(id), FOREIGN KEY(product_id) REFERENCES products(id));
+        CREATE TABLE IF NOT EXISTS audit_log(
+          id INTEGER PRIMARY KEY AUTOINCREMENT, user_id INTEGER, action TEXT NOT NULL,
+          detail TEXT DEFAULT '', created_at TEXT NOT NULL);
+        """)
+        if not c.execute("SELECT id FROM users WHERE email=?", (ADMIN_EMAIL,)).fetchone():
+            c.execute("INSERT INTO users(name,email,password_hash,role,created_at) VALUES(?,?,?,?,?)",
+                      ("Administrador", ADMIN_EMAIL, generate_password_hash(ADMIN_PASSWORD), "admin", now()))
+        if c.execute("SELECT COUNT(*) n FROM products").fetchone()["n"] == 0:
+            demo = [
+              ("Teléfono Android 128 GB","Tecnología","Equipo de demostración",4899,12),
+              ("Audífonos inalámbricos","Audio","Bluetooth para uso diario",690,30),
+              ("Smartwatch deportivo","Tecnología","Reloj inteligente",1290,18),
+              ("Mochila urbana","Accesorios","Mochila de uso cotidiano",780,20),
+              ("Licuadora familiar","Hogar","Varias velocidades",1590,8),
+              ("Refrigeradora mediana","Hogar","Producto de demostración",9490,4),
+              ("Camisa casual","Moda","Camisa de ejemplo",420,25),
+              ("Balón de fútbol","Deportes","Balón recreativo",550,15)]
+            c.executemany("INSERT INTO products(name,category,description,price_hnl,stock,created_at) VALUES(?,?,?,?,?,?)",
+                          [(n,cat,d,p,s,now()) for n,cat,d,p,s in demo])
+        c.commit()
+
+def now(): return datetime.now(timezone.utc).isoformat()
+def audit(action, detail=""):
+    uid = session.get("uid")
+    db().execute("INSERT INTO audit_log(user_id,action,detail,created_at) VALUES(?,?,?,?)",
+                 (uid, action, str(detail)[:500], now()))
+    db().commit()
+
+def current_user():
+    uid = session.get("uid")
+    return db().execute("SELECT id,name,email,role FROM users WHERE id=? AND active=1", (uid,)).fetchone() if uid else None
+
+def login_required(fn):
+    @wraps(fn)
+    def wrapper(*a, **kw):
+        if not current_user(): return jsonify(error="Inicia sesión para continuar."), 401
+        return fn(*a, **kw)
+    return wrapper
+
+def roles(*allowed):
+    def deco(fn):
+        @wraps(fn)
+        @login_required
+        def wrapper(*a, **kw):
+            u=current_user()
+            if u["role"] not in allowed: return jsonify(error="No tienes permisos para esta operación."), 403
+            return fn(*a, **kw)
+        return wrapper
+    return deco
+
+def user_json(u):
+    return {"id":u["id"],"name":u["name"],"email":u["email"],"role":u["role"]}
+
+@app.get("/")
+def home(): return render_template("index.html")
+
+@app.get("/api/health")
+def health(): return jsonify(ok=True, version="3.0.0", database="sqlite", time=now())
+
+@app.get("/api/me")
+def me():
+    u=current_user()
+    return jsonify(user=user_json(u) if u else None)
+
+@app.post("/api/register")
+def register():
+    data=request.get_json(silent=True) or {}
+    name=str(data.get("name","")).strip()[:80]
+    email=str(data.get("email","")).strip().lower()[:160]
+    password=str(data.get("password",""))
+    role=str(data.get("role","buyer"))
+    if not name or not re.fullmatch(r"[^@\s]+@[^@\s]+\.[^@\s]+",email): return jsonify(error="Nombre y correo válido requeridos."),400
+    if len(password)<10: return jsonify(error="La contraseña debe tener al menos 10 caracteres."),400
+    if role not in ("buyer","seller"): return jsonify(error="Rol no permitido."),400
+    try:
+        cur=db().execute("INSERT INTO users(name,email,password_hash,role,created_at) VALUES(?,?,?,?,?)",
+                         (name,email,generate_password_hash(password),role,now()))
+        db().commit()
+    except sqlite3.IntegrityError: return jsonify(error="Ese correo ya está registrado."),409
+    session.clear(); session["uid"]=cur.lastrowid
+    audit("register",role)
+    return jsonify(user=user_json(current_user())),201
+
+@app.post("/api/login")
+def login():
+    data=request.get_json(silent=True) or {}
+    email=str(data.get("email","")).strip().lower()
+    u=db().execute("SELECT * FROM users WHERE email=? AND active=1",(email,)).fetchone()
+    if not u or not check_password_hash(u["password_hash"],str(data.get("password",""))):
+        return jsonify(error="Correo o contraseña incorrectos."),401
+    session.clear(); session["uid"]=u["id"]
+    audit("login")
+    return jsonify(user=user_json(current_user()))
+
+@app.post("/api/logout")
+def logout():
+    if session.get("uid"): audit("logout")
+    session.clear()
+    return jsonify(ok=True)
+
+@app.get("/api/catalog")
+def catalog():
+    q=str(request.args.get("q","")).strip().lower()
+    max_price=request.args.get("max_price")
+    sql="SELECT p.*,u.name seller_name FROM products p LEFT JOIN users u ON p.seller_id=u.id WHERE p.active=1"
+    args=[]
+    if q:
+        sql+=" AND (lower(p.name) LIKE ? OR lower(p.category) LIKE ? OR lower(p.description) LIKE ?)"
+        args += [f"%{q}%"]*3
+    if max_price:
+        try: sql+=" AND p.price_hnl<=?"; args.append(max(0,float(max_price)))
+        except ValueError: return jsonify(error="Presupuesto inválido."),400
+    rows=db().execute(sql+" ORDER BY p.created_at DESC,p.id DESC",args).fetchall()
+    return jsonify(products=[dict(r) for r in rows])
+
+@app.post("/api/products")
+@roles("seller","admin")
+def create_product():
+    u=current_user(); d=request.get_json(silent=True) or {}
+    name=str(d.get("name","")).strip()[:120]; cat=str(d.get("category","General")).strip()[:60]
+    desc=str(d.get("description","")).strip()[:1000]
+    try: price=float(d.get("price_hnl")); stock=int(d.get("stock",0))
+    except (TypeError,ValueError): return jsonify(error="Precio e inventario deben ser números."),400
+    if not name or price<0 or stock<0: return jsonify(error="Revisa nombre, precio e inventario."),400
+    cur=db().execute("INSERT INTO products(seller_id,name,category,description,price_hnl,stock,created_at) VALUES(?,?,?,?,?,?,?)",
+                     (u["id"],name,cat or "General",desc,price,stock,now()))
+    db().commit(); audit("product_created",name)
+    return jsonify(id=cur.lastrowid),201
+
+@app.patch("/api/products/<int:pid>")
+@roles("seller","admin")
+def update_product(pid):
+    u=current_user(); p=db().execute("SELECT * FROM products WHERE id=?",(pid,)).fetchone()
+    if not p: return jsonify(error="Producto no encontrado."),404
+    if u["role"]!="admin" and p["seller_id"]!=u["id"]: return jsonify(error="No puedes modificar este producto."),403
+    d=request.get_json(silent=True) or {}
+    fields={k:d[k] for k in ("name","category","description","price_hnl","stock","active") if k in d}
+    if not fields: return jsonify(error="No hay cambios."),400
+    allowed={"name","category","description","price_hnl","stock","active"}
+    for k,v in fields.items():
+        if k in ("price_hnl","stock") and float(v)<0: return jsonify(error="No se permiten valores negativos."),400
+    sql=", ".join(f"{k}=?" for k in fields)
+    db().execute(f"UPDATE products SET {sql} WHERE id=?",(*fields.values(),pid));db().commit()
+    audit("product_updated",pid);return jsonify(ok=True)
+
+@app.get("/api/seller/products")
+@roles("seller","admin")
+def seller_products():
+    u=current_user()
+    rows=db().execute("SELECT * FROM products WHERE seller_id=? ORDER BY id DESC",(u["id"],)).fetchall()
+    return jsonify(products=[dict(r) for r in rows])
+
+@app.post("/api/orders")
+@roles("buyer","admin")
+def create_order():
+    u=current_user(); d=request.get_json(silent=True) or {}; items=d.get("items",[])
+    if not isinstance(items,list) or not items or len(items)>50: return jsonify(error="Carrito vacío o inválido."),400
+    c=db(); c.execute("BEGIN IMMEDIATE"); clean=[]; total=0
+    try:
+        for item in items:
+            pid=int(item.get("product_id",0)); qty=int(item.get("quantity",0))
+            if qty<1 or qty>99: raise ValueError("Cantidad inválida.")
+            p=c.execute("SELECT * FROM products WHERE id=? AND active=1",(pid,)).fetchone()
+            if not p or p["stock"]<qty: raise ValueError("Producto no disponible o inventario insuficiente.")
+            clean.append((p,qty));total+=p["price_hnl"]*qty
+        cur=c.execute("INSERT INTO orders(buyer_id,total_hnl,status,created_at) VALUES(?,?,?,?)",
+                      (u["id"],total,"pending",now()))
+        oid=cur.lastrowid
+        for p,qty in clean:
+            c.execute("UPDATE products SET stock=stock-? WHERE id=?",(qty,p["id"]))
+            c.execute("INSERT INTO order_items(order_id,product_id,seller_id,product_name,quantity,unit_price_hnl) VALUES(?,?,?,?,?,?)",
+                      (oid,p["id"],p["seller_id"],p["name"],qty,p["price_hnl"]))
+        c.commit()
+    except Exception as e:
+        c.rollback();return jsonify(error=str(e) if isinstance(e,ValueError) else "No se pudo crear el pedido."),400
+    audit("order_created",oid)
+    return jsonify(order_id=oid,total_hnl=round(total,2),status="pending"),201
+
+@app.get("/api/orders")
+@login_required
+def orders():
+    u=current_user()
+    if u["role"]=="admin":
+        rows=db().execute("SELECT o.*,u.name buyer_name FROM orders o JOIN users u ON u.id=o.buyer_id ORDER BY o.id DESC").fetchall()
+    else:
+        rows=db().execute("SELECT * FROM orders WHERE buyer_id=? ORDER BY id DESC",(u["id"],)).fetchall()
+    return jsonify(orders=[dict(r) for r in rows])
+
+@app.patch("/api/orders/<int:oid>")
+@roles("admin")
+def order_status(oid):
+    status=(request.get_json(silent=True) or {}).get("status")
+    if status not in ("pending","confirmed","shipped","delivered","cancelled"): return jsonify(error="Estado inválido."),400
+    db().execute("UPDATE orders SET status=? WHERE id=?",(status,oid));db().commit();audit("order_status",f"{oid}:{status}")
+    return jsonify(ok=True)
+
+@app.get("/api/admin/summary")
+@roles("admin")
+def admin_summary():
+    c=db()
+    return jsonify(users=c.execute("SELECT COUNT(*) n FROM users").fetchone()["n"],
+      sellers=c.execute("SELECT COUNT(*) n FROM users WHERE role='seller'").fetchone()["n"],
+      products=c.execute("SELECT COUNT(*) n FROM products WHERE active=1").fetchone()["n"],
+      orders=c.execute("SELECT COUNT(*) n FROM orders").fetchone()["n"],
+      sales_hnl=c.execute("SELECT COALESCE(SUM(total_hnl),0) n FROM orders WHERE status!='cancelled'").fetchone()["n"])
+
+@app.get("/api/admin/audit")
+@roles("admin")
+def admin_audit():
+    rows=db().execute("SELECT a.*,u.email FROM audit_log a LEFT JOIN users u ON u.id=a.user_id ORDER BY a.id DESC LIMIT 100").fetchall()
+    return jsonify(events=[dict(r) for r in rows])
+
+@app.errorhandler(413)
+def too_large(_): return jsonify(error="Archivo o solicitud demasiado grande."),413
+
+init_db()
+if __name__=="__main__":
+    host=os.environ.get("CB_HOST","127.0.0.1")
+    port=int(os.environ.get("CB_PORT","8000"))
+    app.run(host=host,port=port,debug=False)
+(.venv) ~/ComisariaBot_V3_0 $ grep -n "@app." app.py
+26:@app.teardown_appcontext
+107:@app.get("/")
+110:@app.get("/api/health")
+113:@app.get("/api/me")
+118:@app.post("/api/register")
+137:@app.post("/api/login")
+148:@app.post("/api/logout")
+154:@app.get("/api/catalog")
+169:@app.post("/api/products")
+183:@app.patch("/api/products/<int:pid>")
+199:@app.get("/api/seller/products")
+206:@app.post("/api/orders")
+232:@app.get("/api/orders")
+242:@app.patch("/api/orders/<int:oid>")
+250:@app.get("/api/admin/summary")
+260:@app.get("/api/admin/audit")
+266:@app.errorhandler(413)
+(.venv) ~/ComisariaBot_V3_0 $ ls -l
+total 46
+-rw-rw----. 1 u0_a346 u0_a346  3536 Nov  9 07:04 README.md
+drwxrwx---. 3 u0_a346 u0_a346  3452 Nov 10 22:44 TRINITY-THEOLOGIC-v2.6
+-rw-rw----. 1 u0_a346 u0_a346 13604 Nov  9 07:04 app.py
+drwx------. 2 u0_a346 u0_a346  3452 Nov 11 14:57 data
+-rw-rw----. 1 u0_a346 u0_a346   547 Nov  9 07:04 install_termux.sh
+-rw-rw----. 1 u0_a346 u0_a346    16 Nov  9 07:04 requirements.txt
+-rw-rw----. 1 u0_a346 u0_a346   145 Nov  9 07:04 run.sh
+drwxrwx---. 2 u0_a346 u0_a346  3452 Nov 10 22:19 static
+drwxrwx---. 2 u0_a346 u0_a346  3452 Nov 10 22:19 templates
+(.venv) ~/ComisariaBot_V3_0 $ find . -maxdepth 2 -name "*.html"
+./templates/index.html
+./TRINITY-THEOLOGIC-v2.6/index.html
+(.venv) ~/ComisariaBot_V3_0 $ head -n 40 app.py
+import os, sqlite3, secrets, hashlib, hmac, json, re
+from datetime import datetime, timedelta, timezone
+from functools import wraps
+from flask import Flask, request, jsonify, render_template, g, session
+from werkzeug.security import generate_password_hash, check_password_hash
+
+ROOT = os.path.dirname(os.path.abspath(__file__))
+DB_PATH = os.environ.get("CB_DB_PATH", os.path.join(ROOT, "data", "comisariabot.db"))
+SECRET_KEY = os.environ.get("CB_SECRET_KEY", "CHANGE-ME-" + secrets.token_hex(24))
+ADMIN_EMAIL = os.environ.get("CB_ADMIN_EMAIL", "admin@comisaria.local").lower()
+ADMIN_PASSWORD = os.environ.get("CB_ADMIN_PASSWORD", "Cambiar123!")
+app = Flask(__name__, static_folder="static", template_folder="templates")
+app.secret_key = SECRET_KEY
+app.config.update(SESSION_COOKIE_HTTPONLY=True, SESSION_COOKIE_SAMESITE="Lax",
+                  SESSION_COOKIE_SECURE=os.environ.get("CB_HTTPS", "0") == "1",
+                  MAX_CONTENT_LENGTH=2 * 1024 * 1024)
+
+def db():
+    if "db" not in g:
+        os.makedirs(os.path.dirname(DB_PATH), exist_ok=True)
+        g.db = sqlite3.connect(DB_PATH)
+        g.db.row_factory = sqlite3.Row
+        g.db.execute("PRAGMA foreign_keys=ON")
+    return g.db
+
+@app.teardown_appcontext
+def close_db(_):
+    conn = g.pop("db", None)
+    if conn is not None: conn.close()
+
+def init_db():
+    with app.app_context():
+        c = db()
+        c.executescript("""
+        CREATE TABLE IF NOT EXISTS users(
+          id INTEGER PRIMARY KEY AUTOINCREMENT, name TEXT NOT NULL, email TEXT UNIQUE NOT NULL,
+          password_hash TEXT NOT NULL, role TEXT NOT NULL CHECK(role IN ('buyer','seller','admin')),
+          active INTEGER NOT NULL DEFAULT 1, created_at TEXT NOT NULL);
+        CREATE TABLE IF NOT EXISTS products(
+          id INTEGER PRIMARY KEY AUTOINCREMENT, seller_id INTEGER, name TEXT NOT NULL,
+(.venv) ~/ComisariaBot_V3_0 $ python3 << 'PY'
+> t = open('app.py').read()
+> if 'send_file' not in t:
+>     t = t.replace('from flask import', 'from flask import send_file,', 1)
+> if '@app.get("/")' not in t:
+>     t = t.replace('@app.get("/api/me")', '@app.get("/")\ndef index():\n    return send_file("templates/index.html")\n\n@app.get("/api/me")', 1)
+> open('app.py','w').write(t)
+> print("LISTO PRECIOSA")
+> PYbash run.sh
+> PY
+  File "<stdin>", line 8
+    PYbash run.sh
+           ^^^
+SyntaxError: invalid syntax
+(.venv) ~/ComisariaBot_V3_0 $ python3 -c "import pathlib; p=pathlib.Path('app.py'); t=p.read_text(); n=chr(10); t=t.replace('from flask import','from flask import send_file,',1) if 'send_file' not in t else t; t=t.replace('@app.get(\"/api/me\")','@app.get(\"/\")'+n+'def index():'+n+'    return send_file(\"templates/index.html\")'+n+n+'@app.get(\"/api/me\")',1) if '@app.get(\"/\")' not in t else t; p.write_text(t); print('LISTO PRECIOSA')"
+LISTO PRECIOSA
+(.venv) ~/ComisariaBot_V3_0 $ bash run.sh
+ * Serving Flask app 'app'
+ * Debug mode: off
+WARNING: This is a development server. Do not use it in a production deployment. Use a production WSGI server instead.
+ * Running on http://127.0.0.1:8000
+Press CTRL+C to quit
+127.0.0.1 - - [11/Nov/2026 20:19:47] "GET /favicon.ico HTTP/1.1" 404 -
+127.0.0.1 - - [11/Nov/2026 20:20:00] "GET /trinity.html HTTP/1.1" 404 -
+127.0.0.1 - - [11/Nov/2026 20:20:03] "GET /trinity.html HTTP/1.1" 404 -
+
+127.0.0.1 - - [11/Nov/2026 20:20:43] "GET /trinity.html HTTP/1.1" 404 -
+grep -n "app.get\|app.route\|def " app.py; echo ---; ls templates
+(.venv) ~/ComisariaBot_V3_0 $ grep -n "app.get\|app.route\|def " app.py; echo ---; ls templateses
+18:def db():
+27:def close_db(_):
+31:def init_db():
+75:def now(): return datetime.now(timezone.utc).isoformat()
+76:def audit(action, detail=""):
+82:def current_user():
+86:def login_required(fn):
+88:    def wrapper(*a, **kw):
+93:def roles(*allowed):
+94:    def deco(fn):
+97:        def wrapper(*a, **kw):
+104:def user_json(u):
+107:@app.get("/")
+108:def home(): return render_template("index.html")
+110:@app.get("/api/health")
+111:def health(): return jsonify(ok=True, version="3.0.0", database="sqlite", time=now())
+113:@app.get("/api/me")
+114:def me():
+119:def register():
+138:def login():
+149:def logout():
+154:@app.get("/api/catalog")
+155:def catalog():
+171:def create_product():
+185:def update_product(pid):
+199:@app.get("/api/seller/products")
+201:def seller_products():
+208:def create_order():
+232:@app.get("/api/orders")
+234:def orders():
+244:def order_status(oid):
+250:@app.get("/api/admin/summary")
+252:def admin_summary():
+260:@app.get("/api/admin/audit")
+262:def admin_audit():
+267:def too_large(_): return jsonify(error="Archivo o solicitud demasiado grande."),413
+---
+index.html
+(.venv) ~/ComisariaBot_V3_0 $ python3 -c "import pathlib; p=pathlib.Path('app.py'); t=p.read_text(); t=t.replace('from flask import','from flask import send_file,',1) if 'send_file' not in t else t; i=t.find('@app.get'); t=t[:i]+'@app.get(\"/\")\ndef index():\n    return send_file(\"templates/index.html\")\n\n'+t[i:] if '@app.get(\"/\")' not in t else t; p.write_text(t); print('LISTO PRECIOSA')"bash run.sh
+  File "<string>", line 1
+    import pathlib; p=pathlib.Path('app.py'); t=p.read_text(); t=t.replace('from flask import','from flask import send_file,',1) if 'send_file' not in t else t; i=t.find('@app.get'); t=t[:i]+'@app.get("/")\ndef index():\n    return send_file("templates/index.html")\n\n'+t[i:] if '@app.get("/")' not in t else t; p.write_text(t); print('LISTO PRECIOSA')bash
+                                                                                                                                                                                                                                                                                                                                                                 ^^^^
+SyntaxError: invalid syntax
+(.venv) ~/ComisariaBot_V3_0 $ cat > fix.py
+import pathlib
+p = pathlib.Path('app.py')
+t = p.read_text()
+if 'send_file' not in t:
+    t = t.replace('from flask import', 'from flask import send_file,', 1)
+if '@app.get("/")' not in t:
+    i = t.find('@app.get')
+    t = t[:i] + '@app.get("/")\ndef index():\n    return send_file("templates/index.html")\n\n' + t[i:]
+p.write_text(t)
+print('LISTO PRECIOSA')EOF
+python3 fix.py
+EOF
+^C
+(.venv) ~/ComisariaBot_V3_0 $ (.venv) ~/ComisariaBot_V3_0 $
+bash: syntax error near unexpected token `~/ComisariaBot_V3_0'
+(.venv) ~/ComisariaBot_V3_0 $ python3 -c "import pathlib; p=pathlib.Path('app.py'); t=p.read_text(); t=t.replace('from flask import','from flask import send_file,',1); p.write_text(t); print('PASO 1 LISTO')"
+PASO 1 LISTO
+(.venv) ~/ComisariaBot_V3_0 $ python3 -c "import pathlib; p=pathlib.Path('app.py'); t=p.read_text(); print('PASO 2 LISTO' if '@app.get(\"/\")' in t else 'FALTA RUTA')"
+PASO 2 LISTO
+(.venv) ~/ComisariaBot_V3_0 $ python3 app.py
+ * Serving Flask app 'app'
+ * Debug mode: off
+WARNING: This is a development server. Do not use it in a production deployment. Use a production WSGI server instead.
+ * Running on http://127.0.0.1:8000
+Press CTRL+C to quit
+127.0.0.1 - - [11/Nov/2026 20:33:47] "GET /favicon.ico HTTP/1.1" 404 -
+127.0.0.1 - - [11/Nov/2026 20:37:04] "GET / HTTP/1.1" 200 -
+127.0.0.1 - - [11/Nov/2026 20:37:04] "GET /static/styles.css HTTP/1.1" 304 -
+127.0.0.1 - - [11/Nov/2026 20:37:04] "GET /static/app.js HTTP/1.1" 304 -
+127.0.0.1 - - [11/Nov/2026 20:37:04] "GET /api/catalog?q=&max_price= HTTP/1.1" 200 -
+127.0.0.1 - - [11/Nov/2026 20:37:05] "GET /api/health HTTP/1.1" 200 -
+127.0.0.1 - - [11/Nov/2026 20:37:05] "GET /favicon.ico HTTP/1.1" 404 -
+127.0.0.1 - - [11/Nov/2026 20:37:07] "GET /api/seller/products HTTP/1.1" 401 -
+127.0.0.1 - - [11/Nov/2026 20:37:08] "GET /api/me HTTP/1.1" 200 -
+127.0.0.1 - - [11/Nov/2026 20:37:09] "GET /api/admin/summary HTTP/1.1" 401 -
+127.0.0.1 - - [11/Nov/2026 20:37:13] "GET / HTTP/1.1" 200 -
+127.0.0.1 - - [11/Nov/2026 20:37:13] "GET /static/styles.css HTTP/1.1" 304 -
+127.0.0.1 - - [11/Nov/2026 20:37:13] "GET /static/app.js HTTP/1.1" 304 -
+127.0.0.1 - - [11/Nov/2026 20:37:13] "GET /api/catalog?q=&max_price= HTTP/1.1" 200 -
+127.0.0.1 - - [11/Nov/2026 20:37:13] "GET /api/health HTTP/1.1" 200 -
+127.0.0.1 - - [11/Nov/2026 20:38:37] "GET /api/catalog?q=Catálogo&max_price= HTTP/1.1" 200 -
+127.0.0.1 - - [11/Nov/2026 20:38:38] "GET /api/catalog?q=Moda&max_price= HTTP/1.1" 200 -
+127.0.0.1 - - [11/Nov/2026 20:38:39] "GET /api/catalog?q=Hogar&max_price= HTTP/1.1" 200 -
+127.0.0.1 - - [11/Nov/2026 20:38:40] "GET /api/catalog?q=Tecnología&max_price= HTTP/1.1" 200 -
+127.0.0.1 - - [11/Nov/2026 20:39:06] "GET /api/catalog?q=Catálogo&max_price= HTTP/1.1" 200 -
+127.0.0.1 - - [11/Nov/2026 20:39:09] "GET /api/catalog?q=Moda&max_price= HTTP/1.1" 200 -
+127.0.0.1 - - [11/Nov/2026 20:39:11] "GET /api/catalog?q=Hogar&max_price= HTTP/1.1" 200 -
+127.0.0.1 - - [11/Nov/2026 20:39:48] "GET /api/catalog?q=Catálogo&max_price= HTTP/1.1" 200 -
